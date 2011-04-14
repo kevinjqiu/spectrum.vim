@@ -18,7 +18,7 @@ class Spectrum(object):
 
     def previous(self):
         if self.idx == 0:
-            print 'Already at the beginning of the colorscheme list'
+            print 'Already at the first colorscheme'
         else:
             self.idx -= 1
             self._set_scheme(self.history[self.idx])

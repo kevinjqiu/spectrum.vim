@@ -9,9 +9,10 @@ Vim 7+ and compiled with Python
 Default Key binding
 ===================
 * `<Leader>q` - randomly pick a colorscheme
+* `<Leader>-` - go back one colorscheme
+* `<Leader>+` - go forward one colorscheme
 
 TODO
 ====
 * Vote up/down a colorscheme
 * Weighted randomizing
-* Previous/Next
