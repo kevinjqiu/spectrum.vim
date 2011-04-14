@@ -17,15 +17,23 @@ class Spectrum(object):
             retval |= set(files)
         return retval
 
-    def spin(self):
+    def shuffle(self):
         colorscheme = random.choice(list(self.colorschemes))
+        self._set_scheme(colorscheme)
+
+    def previous(self):
+        raise NotImplementedError
+
+    def next(self):
+        raise NotImplementedError
+
+    def _set_scheme(self, colorscheme):
         vim.command("colorscheme %s" % colorscheme)
-              
 
 spectrum = Spectrum()
 
-def spectrum_spin():
-    spectrum.spin()
+def shuffle():
+    spectrum.shuffle()
 EOP
 
-nmap <silent><Leader>q :python spectrum_spin()<CR>
+nmap <silent><Leader>q :python shuffle()<CR>
