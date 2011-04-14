@@ -7,6 +7,34 @@ class Spectrum(object):
     
     def __init__(self):
         self.colorschemes = self._get_all_colorschemes()
+        self.history = [self._current()]
+        self.idx = 0
+
+    def shuffle(self):
+        colorscheme = random.choice(list(self.colorschemes))
+        self.history.append(colorscheme)
+        self.idx = len(self.history)-1
+        self._set_scheme(self.history[self.idx])
+
+    def previous(self):
+        if self.idx == 0:
+            print 'Already at the beginning of the colorscheme list'
+        else:
+            self.idx -= 1
+            self._set_scheme(self.history[self.idx])
+
+    def next(self):
+        if self.idx == len(self.history)-1:
+            print 'Already at the latest colorscheme'
+        else:
+            self.idx += 1
+            self._set_scheme(self.history[self.idx])
+
+    def inspect(self):
+        print self.history, "current:", self.idx
+        
+    def _set_scheme(self, colorscheme):
+        vim.command("colorscheme %s" % colorscheme)
 
     def _get_all_colorschemes(self):
         retval = set()
@@ -17,15 +45,12 @@ class Spectrum(object):
             retval |= set(files)
         return retval
 
-    def spin(self):
-        colorscheme = random.choice(list(self.colorschemes))
-        vim.command("colorscheme %s" % colorscheme)
-              
+    def _current(self):
+        return vim.eval('g:colors_name')
 
 spectrum = Spectrum()
-
-def spectrum_spin():
-    spectrum.spin()
 EOP
 
-nmap <silent><Leader>q :python spectrum_spin()<CR>
+nmap <silent><Leader>q :python spectrum.shuffle()<CR>
+nmap <silent><Leader>+ :python spectrum.next()<CR>
+nmap <silent><Leader>- :python spectrum.previous()<CR>
