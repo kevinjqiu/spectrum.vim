@@ -14,3 +14,4 @@ TODO
 ====
 * Vote up/down a colorscheme
 * Weighted randomizing
+* Previous/Next
