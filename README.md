@@ -12,7 +12,3 @@ Default Key binding
 * `<Leader>-` - go back one colorscheme
 * `<Leader>+` - go forward one colorscheme
 
-TODO
-====
-* Vote up/down a colorscheme
-* Weighted randomizing
