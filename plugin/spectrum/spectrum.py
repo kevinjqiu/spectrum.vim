@@ -6,9 +6,9 @@ from urllib import urlretrieve as fetch
 class Spectrum(object):
     
     def __init__(self):
-        self.colorschemes = self._get_all_colorschemes()
-        self.history = [self._current()]
-        self.idx = 0
+        self._colorschemes = self._get_all_colorschemes()
+        self._history = [self._current()]
+        self._idx = 0
 
         # configuration
         self.dot_folder = path.realpath(vim.eval('expand(spectrum#inspiration_storage_dir)'))
@@ -24,27 +24,27 @@ class Spectrum(object):
         vim.command("set rtp+=%s" % self.dot_folder) 
 
     def shuffle(self):
-        colorscheme = choice(list(self.colorschemes))
-        self.history.append(colorscheme)
-        self.idx = len(self.history)-1
-        self._set_scheme(self.history[self.idx])
+        colorscheme = choice(list(self._colorschemes))
+        self._history.append(colorscheme)
+        self._idx = len(self._history)-1
+        self._set_scheme(self._history[self._idx])
 
     def previous(self):
-        if self.idx == 0:
+        if self._idx == 0:
             print 'Already at the first colorscheme'
         else:
-            self.idx -= 1
-            self._set_scheme(self.history[self.idx])
+            self._idx -= 1
+            self._set_scheme(self._history[self._idx])
 
     def next(self):
-        if self.idx == len(self.history)-1:
+        if self._idx == len(self._history)-1:
             print 'Already at the latest colorscheme'
         else:
-            self.idx += 1
-            self._set_scheme(self.history[self.idx])
+            self._idx += 1
+            self._set_scheme(self._history[self._idx])
 
     def inspect(self):
-        print self.history, "current:", self.idx
+        print self._history, "current:", self._idx
         
     def inspiration(self, style='dark'):
         """`style` is either 'dark' or 'bright'""",
@@ -55,9 +55,9 @@ class Spectrum(object):
         try:
             colorscheme_name = 'inspiration%(seed)s' % seed
             fetch(endpoint, path.join(self.dot_folder_colors, colorscheme_name + '.vim'))
-            self.history.append(colorscheme_name)
-            self.idx = len(self.history)-1
-            self._set_scheme(self.history[self.idx])
+            self._history.append(colorscheme_name)
+            self._idx = len(self._history)-1
+            self._set_scheme(self._history[self._idx])
         except Exception as e:
             print e
 
