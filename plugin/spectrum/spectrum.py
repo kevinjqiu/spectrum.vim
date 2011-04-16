@@ -73,13 +73,17 @@ class Spectrum(object):
         rtp = vim.eval('&rtp').split(',')
 
         for p in filter(path.exists, (path.join(p, 'colors') for p in rtp)):
-            files = ['.'.join(file.split('.')[:-1]) 
-                     for file 
+            colorscheme = [Spectrum._get_colorscheme_name(file_name)
+                     for file_name
                      in filter(lambda file: file.endswith('.vim'), listdir(p)))]
-            retval |= set(files)
+            retval |= set(colorscheme)
         return retval
 
     def _current(self):
         return vim.eval('g:colors_name')
+
+    @staticmethod
+    def _get_colorscheme_name(file_name):
+        return '.'.join(file_name.split('.')[:-1])
 
 spectrum = Spectrum()
