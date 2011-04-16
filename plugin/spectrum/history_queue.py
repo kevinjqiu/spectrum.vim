@@ -97,3 +97,6 @@ class HistoryQueue(object):
             if extra_items > 0:
                 del self._q[:extra_items]
                 self._cur_idx -= extra_items
+
+    def __str__(self):
+        return "%s at %d; max_size:%d" % (self._q, self._cur_idx, self._max_size)
