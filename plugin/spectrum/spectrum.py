@@ -72,8 +72,10 @@ class Spectrum(object):
         retval = set()
         rtp = vim.eval('&rtp').split(',')
 
-        for p in filter(path.exists, map(lambda p:path.join(p, 'colors'), rtp)):
-            files = map(lambda file: '.'.join(file.split('.')[:-1]), filter(lambda file: file.endswith('.vim'), listdir(p)))
+        for p in filter(path.exists, (path.join(p, 'colors') for p in rtp)):
+            files = ['.'.join(file.split('.')[:-1]) 
+                     for file 
+                     in filter(lambda file: file.endswith('.vim'), listdir(p)))]
             retval |= set(files)
         return retval
 
