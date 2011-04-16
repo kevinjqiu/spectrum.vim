@@ -2,6 +2,8 @@
 " This dir must be writable to the current user
 let spectrum#inspiration_storage_dir = "$HOME/.spectrum"
 let spectrum#inspiration_endpoint = "http://inspiration.sweyla.com/code/vim/inspiration%(seed)s.vim"
+" the maximum number of colorscheme changes to remember
+let spectrum#max_history = 10
 
 let s:current_file = expand("<sfile>")
 python << EOP
