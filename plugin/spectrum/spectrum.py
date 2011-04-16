@@ -4,6 +4,7 @@ from random import randint, choice
 from os import path, listdir, makedirs, walk, unlink
 from urllib import urlretrieve as fetch
 from history_queue import HistoryQueue
+from weighted_choice import Choice 
 
 class Spectrum(object):
     
@@ -20,6 +21,8 @@ class Spectrum(object):
         self._history = HistoryQueue(self.max_history_size)
         self._history.set_current(self._current())
 
+        self._choice = Choice(self._colorschemes, self._voted_colorschemes)
+
         # create necessary folders
         if not path.exists(self.dot_folder):
             makedirs(self.dot_folder)
@@ -29,7 +32,7 @@ class Spectrum(object):
         vim.command("set rtp+=%s" % self.dot_folder)
 
     def shuffle(self):
-        colorscheme = choice(list(self._colorschemes))
+        colorscheme = self._choice.next()
         self._history.set_current(colorscheme)
         self._set_scheme(self._history.current())
 
