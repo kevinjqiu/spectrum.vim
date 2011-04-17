@@ -129,15 +129,13 @@ class Spectrum(object):
 
     def _get_voted_colorschemes(self):
         if path.exists(self.vote_filename):
-            with open(self.vote_filename, 'r') as f:
-                return json.load(f)
+            return self._load(self.vote_filename)
         else:
             return self._save(self.vote_filename, {})
 
     def _get_excluded_colorschemes(self):
         if path.exists(self.excluded_filename):
-            with open(self.excluded_filename, 'r') as f:
-                return json.load(f)
+            return self._load(self.excluded_filename)
         else:
             return self._save(self.excluded_filename, [])
 
@@ -150,6 +148,10 @@ class Spectrum(object):
                 obj = list(obj)
             json.dump(obj, f)
             return obj
+
+    def _load(self, filename):
+        with open(filename, 'r') as f:
+            return json.load(f)
 
 def _get_colorscheme_name(file_name):
     return '.'.join(file_name.split('.')[:-1])
