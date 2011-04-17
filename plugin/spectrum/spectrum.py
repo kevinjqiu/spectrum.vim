@@ -1,6 +1,6 @@
 import vim
 import json
-from random import randint, choice
+from random import random
 from operator import itemgetter
 from os import path, listdir, makedirs, walk, unlink
 from urllib import urlretrieve as fetch
@@ -85,9 +85,8 @@ class Spectrum(object):
 
     def inspiration(self, style='dark'):
         """`style` is either 'dark' or 'bright'""",
-        # FIXME: generated colorschemes seem to be bright always...
-        seed = {"seed":str(randint(1, 50000) if style != 'dark' else randint(50001,100001))}
-
+        seed = {'seed': \
+                100000+int(399999*random())+500000 if style=='dark' else 0}
         endpoint = self.inspiration_endpoint % seed
         try:
             colorscheme_name = 'inspiration%(seed)s' % seed
