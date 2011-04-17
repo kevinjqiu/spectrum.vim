@@ -19,3 +19,6 @@ Default Key binding
 * `<Leader>q` - randomly pick a colorscheme
 * `<Leader>-` - go back one colorscheme
 * `<Leader>+` - go forward one colorscheme
+* `<Leader>csi` - inspect the current colorscheme queue
+* `<Leader>csl` - "like" the current colorscheme
+* `<Leader>csu` - "unlike" (exclude) the current colorscheme

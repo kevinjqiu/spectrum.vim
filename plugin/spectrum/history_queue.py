@@ -99,4 +99,10 @@ class HistoryQueue(object):
                 self._cur_idx -= extra_items
 
     def __str__(self):
-        return "%s at %d; max_size:%d" % (self._q, self._cur_idx, self._max_size)
+        output = []
+        for idx in xrange(0, len(self._q)):
+            if idx == self._cur_idx:
+                output.append("*%s*"%self._q[idx])
+            else:
+                output.append(self._q[idx])
+        return "[%s]"%(",".join(output))
