@@ -1,6 +1,7 @@
 import vim
 import json
 from random import randint, choice
+from operator import itemgetter
 from os import path, listdir, makedirs, walk, unlink
 from urllib import urlretrieve as fetch
 from history_queue import HistoryQueue
@@ -102,6 +103,17 @@ class Spectrum(object):
             for file in filter(lambda f: path.isfile(f), [path.join(root, f) for f in files]):
                 unlink(file)
                 print "%s deleted." % file
+
+    def show_excluded_colorschemes(self):
+        print self._excluded
+
+    def show_favorite_colorschemes(self, count=5):
+        """Show the top `count` colorschemes"""
+        self._voted_colorschemes
+        favs = sorted(self._voted_colorschemes.iteritems(),
+                      key=itemgetter(1),
+                      reverse=True)
+        print "\n".join([cs for (cs,cnt) in favs[:count]])
 
     def _set_scheme(self, colorscheme):
         vim.command("colorscheme %s" % colorscheme)
