@@ -1,13 +1,13 @@
 import vim
 import json
-from random import randint, choice 
+from random import randint, choice
 from os import path, listdir, makedirs, walk, unlink
 from urllib import urlretrieve as fetch
 from history_queue import HistoryQueue
-from weighted_choice import Choice 
+from weighted_choice import Choice
 
 class Spectrum(object):
-    
+
     def __init__(self):
         # configuration
         self.dot_folder = path.realpath(vim.eval('expand(spectrum#inspiration_storage_dir)'))
@@ -15,13 +15,17 @@ class Spectrum(object):
         self.inspiration_endpoint = vim.eval("spectrum#inspiration_endpoint")
         self.max_history_size = int(vim.eval("spectrum#max_history"))
         self.vote_filename = path.join(self.dot_folder, 'votes.json')
+        self.excluded_filename = path.join(self.dot_folder, 'excluded.json')
 
         self._colorschemes = self._get_all_colorschemes()
         self._voted_colorschemes = self._get_voted_colorschemes()
+        self._excluded = set(self._get_excluded_colorschemes())
         self._history = HistoryQueue(self.max_history_size)
         self._history.set_current(self._current())
 
-        self._choice = Choice(self._colorschemes, self._voted_colorschemes)
+        self._choice = Choice(self._colorschemes,
+                              self._voted_colorschemes,
+                              exclude=set(self._excluded))
 
         # create necessary folders
         if not path.exists(self.dot_folder):
@@ -54,18 +58,33 @@ class Spectrum(object):
         self._voted_colorschemes[current] = \
             self._voted_colorschemes.get(current, 0) + 1
         try:
-            with open(self.vote_filename, 'w') as f:
-                json.dump(self._voted_colorschemes, f)
+            self._save(self.vote_filename, self._voted_colorschemes)
             print "Your vote for '%s' has been recorded." % current
+            if current in self._excluded:
+                self._excluded.remove(current)
+                self._save(self.excluded_filename, self._excluded)
+        except Exception as e:
+            print e
+
+    def exclude(self):
+        """exclude the current colorscheme"""
+        current = self._current()
+        self._excluded.add(current)
+        try:
+            self._save(self.excluded_filename, self._excluded)
+            print "'%s' has been excluded" % current
+            if current in self._voted_colorschemes:
+                del self._voted_colorschemes[current]
+                self._save(self.vote_filename, self._voted_colorschemes)
         except Exception as e:
             print e
 
     def inspect(self):
-        print self._history.__str__()
-        
+        print str(self._history)
+
     def inspiration(self, style='dark'):
         """`style` is either 'dark' or 'bright'""",
-        # TODO: generated colorschemes seem to be bright always...
+        # FIXME: generated colorschemes seem to be bright always...
         seed = {"seed":str(randint(1, 50000) if style != 'dark' else randint(50001,100001))}
 
         endpoint = self.inspiration_endpoint % seed
@@ -97,18 +116,28 @@ class Spectrum(object):
         return retval
 
     def _get_voted_colorschemes(self):
-        retval = None
         if path.exists(self.vote_filename):
             with open(self.vote_filename, 'r') as f:
-                retval = json.load(f)
+                return json.load(f)
         else:
-            retval = {}
-            with open(self.vote_filename, 'w') as f:
-                json.dump(retval, f)
-        return retval
+            return self._save(self.vote_filename, {})
+
+    def _get_excluded_colorschemes(self):
+        if path.exists(self.excluded_filename):
+            with open(self.excluded_filename, 'r') as f:
+                return json.load(f)
+        else:
+            return self._save(self.excluded_filename, [])
 
     def _current(self):
         return vim.eval('g:colors_name')
+
+    def _save(self, filename, obj):
+        with open(filename, 'w') as f:
+            if isinstance(obj, set):
+                obj = list(obj)
+            json.dump(obj, f)
+            return obj
 
 def _get_colorscheme_name(file_name):
     return '.'.join(file_name.split('.')[:-1])

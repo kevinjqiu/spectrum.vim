@@ -29,3 +29,4 @@ nmap <silent><Leader>csd :python spectrum.inspiration()<CR>
 nmap <silent><Leader>csb :python spectrum.inspiration('bright')<CR>
 nmap <silent><Leader>csi :python spectrum.inspect()<CR>
 nmap <silent><Leader>csl :python spectrum.like()<CR>
+nmap <silent><Leader>csu :python spectrum.exclude()<CR>
