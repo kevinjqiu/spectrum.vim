@@ -22,3 +22,5 @@ Default Key binding
 * `<Leader>csi` - inspect the current colorscheme queue
 * `<Leader>csl` - "like" the current colorscheme
 * `<Leader>csu` - "unlike" (exclude) the current colorscheme
+* `<Leader>csb` - randomly retrieve a bright styled colorscheme from [Inspiration](http://inspiration.sweyla.com)
+* `<Leader>csd` - randomly retrieve a dark styled colorscheme from [Inspiration](http://inspiration.sweyla.com)
