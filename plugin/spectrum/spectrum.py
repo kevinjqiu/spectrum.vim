@@ -115,7 +115,12 @@ class Spectrum(object):
         print "\n".join([cs for (cs,cnt) in favs[:count]])
 
     def _set_scheme(self, colorscheme):
-        vim.command("colorscheme %s" % colorscheme)
+        try:
+            vim.command("colorscheme %s" % colorscheme)
+            print "switched colorscheme to: '%s'" % colorscheme
+            print ""
+        except vim.error:
+            print "colorscheme %s is not available" % colorscheme
 
     def _get_all_colorschemes(self):
         retval = set()
