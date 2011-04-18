@@ -121,6 +121,9 @@ class Spectrum(object):
             print ""
         except vim.error:
             print "colorscheme %s is not available" % colorscheme
+            if colorscheme in self._voted_colorschemes.keys():
+                del self._voted_colorschemes[colorscheme]
+                self._save(self.vote_filename, self._voted_colorschemes)
 
     def _get_all_colorschemes(self):
         retval = set()
