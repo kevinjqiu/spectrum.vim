@@ -22,11 +22,55 @@ from spectrum.spectrum import spectrum
 
 EOP
 
-nmap <silent><Leader>q :python spectrum.shuffle()<CR>
-nmap <silent><Leader>+ :python spectrum.next()<CR>
-nmap <silent><Leader>- :python spectrum.previous()<CR>
-nmap <silent><Leader>csd :python spectrum.inspiration()<CR>
-nmap <silent><Leader>csb :python spectrum.inspiration('bright')<CR>
-nmap <silent><Leader>csi :python spectrum.inspect()<CR>
-nmap <silent><Leader>csl :python spectrum.like()<CR>
-nmap <silent><Leader>csu :python spectrum.exclude()<CR>
+function! SpectrumShuffle()
+    python spectrum.shuffle()
+endfunction
+
+function! SpectrumNext()
+    python spectrum.next()
+endfunction
+
+function! SpectrumPrevious()
+    python spectrum.previous()
+endfunction
+
+function! SpectrumInspirationDark()
+    python spectrum.inspiration('dark')
+endfunction
+
+function! SpectrumInspirationBright()
+    python spectrum.inspiration('bright')
+endfunction
+
+function! SpectrumLike()
+    python spectrum.like()
+endfunction
+
+function! SpectrumExclude()
+    python spectrum.exclude()
+endfunction
+
+function! SpectrumInspect()
+    python spectrum.inspect()
+endfunction
+
+function! SpectrumInspirationPurge()
+    python spectrum.purge_inspiration()
+endfunction
+
+function! SpectrumShowExcluded()
+    python spectrum.show_excluded_colorschemes()
+endfunction
+
+function! SpectrumShowFavorite()
+    python spectrum.show_favorite_colorschemes()
+endfunction
+
+nmap <silent><Leader>q :call SpectrumShuffle()<CR>
+nmap <silent><Leader>+ :call SpectrumNext()<CR>
+nmap <silent><Leader>- :call SpectrumPrevious()<CR>
+nmap <silent><Leader>csd :call SpectrumInspirationDark()<CR>
+nmap <silent><Leader>csb :call SpectrumInspirationBright()<CR>
+nmap <silent><Leader>csi :call SpectrumInspect()<CR>
+nmap <silent><Leader>csl :call SpectrumLike()<CR>
+nmap <silent><Leader>csu :call SpectrumExclude()<CR>
