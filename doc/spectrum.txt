@@ -1,0 +1,67 @@
+*spectrum.txt*     Vim Colorscheme Roulette
+
+===============================================================================
+Author: Kevin Jing Qiu <kevin dot jing dot qiu @gmail.com     *spectrum-author*
+===============================================================================
+
+INTRODUCTION                                                         *spectrum*
+
+This plugin allows users to quickly switch to a random colorscheme. It also
+integrates with Inspiration(http://inspiration.sweyla.com/code/), a website that
+randomly generates vim colorschemes. It's greate for exploring the colorschemes
+and finding which ones float your boat.
+
+:call SpectrumShuffle()                                       *SpectrumShuffle*
+
+    Look through the available colorschemes installed on your vim platform and
+    randomly choose and set one colorscheme.
+    Default keybinding: <Leader>q
+
+:call SpectrumPrevious()                                     *SpectrumPrevious*
+    
+    Select the previously used colorscheme.
+    Default keybinding: <Leader>-
+
+:call SpectrumNext()                                             *SpectrumNext* 
+    
+    Re-select the next colorscheme.
+    Default keybinding: <Leader>+
+
+:call SpectrumLike()                                             *SpectrumLike*
+
+    Vote up the current colorscheme. Colorschemes voted up will have a heavier
+    weight and thus more likely to be picked up by the roulette.
+    Default keybinding: <Leader>csl
+
+:call SpectrumExclude()                                       *SpectrumExclude*
+
+    Exclude the current colorscheme. Colorschemes excluded will not be picked up
+    by the roulette.
+    Default keybinding: <Leader>csu
+
+:call SpectrumShowFavorite()                             *SpectrumShowFavorite*
+
+    Show a list of colorschemes voted up by you.
+
+:call SpectrumShowExcluded()                             *SpectrumShowExcluded*
+
+    Show a list of colorschemes excluded by you.
+
+:call SpectrumInspect()                                       *SpectrumInspect*
+
+    Show the current colorscheme queue.
+    Default keybinding: <Leader>csi
+
+:call SpectrumInspirationDark()                       *SpectrumInspirationDark*
+
+    Randomly pick a dark colorscheme from Inspiration
+    Default keybinding: <Leader>csd
+
+:call SpectrumInspirationBright()                   *SpectrumInspirationBright*
+
+    Randomly pick a bright colorscheme from Inspiration
+    Default keybinding: <Leader>csb
+
+:call SpectrumInspirationPurge()                     *SpectrumInspirationPurge*
+
+    Purge all downloaded Inspiration colorschemes
