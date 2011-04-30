@@ -6,7 +6,7 @@ let spectrum#inspiration_endpoint = "http://inspiration.sweyla.com/code/vim/insp
 let spectrum#max_history = 10
 
 python << EOP
-
+import vim
 import sys
 from os import path
 
