@@ -150,6 +150,9 @@ class Spectrum(object):
         return vim.eval('g:colors_name')
 
     def _save(self, filename, obj):
+        if not path.exists(path.dirname(filename)):
+            makedirs(path.dirname(filename))
+
         with open(filename, 'w') as f:
             if isinstance(obj, set):
                 obj = list(obj)
