@@ -65,12 +65,3 @@ endfunction
 function! SpectrumShowFavorite()
     python spectrum.show_favorite_colorschemes()
 endfunction
-
-nmap <silent><Leader>q :call SpectrumShuffle()<CR>
-nmap <silent><Leader>+ :call SpectrumNext()<CR>
-nmap <silent><Leader>- :call SpectrumPrevious()<CR>
-nmap <silent><Leader>csd :call SpectrumInspirationDark()<CR>
-nmap <silent><Leader>csb :call SpectrumInspirationBright()<CR>
-nmap <silent><Leader>csi :call SpectrumInspect()<CR>
-nmap <silent><Leader>csl :call SpectrumLike()<CR>
-nmap <silent><Leader>csu :call SpectrumExclude()<CR>
