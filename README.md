@@ -14,13 +14,13 @@ Installation
 * `git clone https://github.com/kevinjqiu/spectrum.git`, and then copy everything in `plugin/` into your `$HOME/.vim/plugin/`. and `doc/` to `$HOME/.vim/doc/`. If you're using Pathogen, add `spectrum.vim/` to your runtime path.
 * If you use [vundle](https://github.com/gmarik/vundle.git) add `Bundle git@github.com:kevinjqiu/spectrum.vim.git` to your bundle config and then in vim, do `:BundleInstall`. Feel free to checkout [my vim setup](https://github.com/kevinjqiu/vimmy) and [my Vundle configure](https://github.com/kevinjqiu/vimmy/blob/master/.vim/conf/vundle.vim).
 
-Default Key binding
-===================
-* `<Leader>q` - randomly pick a colorscheme
-* `<Leader>-` - go back one colorscheme
-* `<Leader>+` - go forward one colorscheme
-* `<Leader>csi` - inspect the current colorscheme queue
-* `<Leader>csl` - "like" the current colorscheme
-* `<Leader>csu` - "unlike" (exclude) the current colorscheme
-* `<Leader>csb` - randomly retrieve a bright styled colorscheme from [Inspiration](http://inspiration.sweyla.com)
-* `<Leader>csd` - randomly retrieve a dark styled colorscheme from [Inspiration](http://inspiration.sweyla.com)
+Commands available
+==================
+* SpectrumShuffle()
+* SpectrumNext()
+* SpectrumPrevious()
+* SpectrumInspirationDark()
+* SpectrumInspirationBright()
+* SpectrumInspect()
+* SpectrumLike()
+* SpectrumExclude()
